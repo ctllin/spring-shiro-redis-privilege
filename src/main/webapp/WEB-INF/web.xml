@@ -15,7 +15,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<!-- <param-value>classpath:spring/spring.xml,classpath:spring/spring-ehcache.xml,classpath:spring/spring-hibernate.xml,classpath:spring/spring-tasks.xml</param-value> -->
-		<param-value>classpath:spring/spring-mybatis.xml</param-value>
+		<param-value>classpath:spring.xml</param-value>
 	</context-param>
 	
 	<context-param>
