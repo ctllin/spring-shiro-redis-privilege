@@ -1,8 +1,9 @@
 package com.ctl.sys.manger.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SysRole {
+public class SysRole implements Serializable {
     private Integer id;
 
     private String name;

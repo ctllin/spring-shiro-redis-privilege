@@ -1,6 +1,8 @@
 package com.ctl.sys.manger.framework.constant;
 
-public class GlobalConstant {
+import java.io.Serializable;
+
+public class GlobalConstant implements Serializable{
 
 	public static final String SESSION_INFO = "sessionInfo";
 

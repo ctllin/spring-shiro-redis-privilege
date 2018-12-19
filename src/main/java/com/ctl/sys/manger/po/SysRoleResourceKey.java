@@ -1,6 +1,8 @@
 package com.ctl.sys.manger.po;
 
-public class SysRoleResourceKey {
+import java.io.Serializable;
+
+public class SysRoleResourceKey implements Serializable {
     private Integer role_id;
 
     private Integer resource_id;

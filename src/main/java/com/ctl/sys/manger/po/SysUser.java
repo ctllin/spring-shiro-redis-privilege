@@ -1,10 +1,11 @@
 package com.ctl.sys.manger.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class SysUser {
+public class SysUser implements Serializable {
     private Integer id;
 
     private String loginname;
@@ -12,6 +13,8 @@ public class SysUser {
     private String name;
 
     private String password;
+
+    private String password_salt;
 
     private Integer customer_id;
 
@@ -145,5 +148,12 @@ public class SysUser {
 	public void setOrganizationName(String organizationName) {
 		 this.organizationName = organizationName == null ? null : organizationName.trim();
 	}
-    
+
+    public String getPassword_salt() {
+        return password_salt;
+    }
+
+    public void setPassword_salt(String password_salt) {
+        this.password_salt = password_salt;
+    }
 }

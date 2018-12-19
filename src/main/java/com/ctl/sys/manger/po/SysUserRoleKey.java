@@ -1,6 +1,8 @@
 package com.ctl.sys.manger.po;
 
-public class SysUserRoleKey {
+import java.io.Serializable;
+
+public class SysUserRoleKey implements Serializable {
     private Integer user_id;
 
     private Integer role_id;

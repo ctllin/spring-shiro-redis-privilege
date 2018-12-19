@@ -1,5 +1,7 @@
 package com.ctl.sys.manger.model.base;
 
+import java.io.Serializable;
+
 /**
  * 统一定义id的entity基类.
  * 
@@ -8,7 +10,7 @@ package com.ctl.sys.manger.model.base;
  * 
  * @author 鸵鸟
  */
-public abstract class IdEntity {
+public abstract class IdEntity implements Serializable{
 
 	protected Integer id;
 
