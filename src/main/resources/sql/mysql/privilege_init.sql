@@ -279,4 +279,4 @@ INSERT INTO `sys_user_role` VALUES ('1', '1');
 -- View structure for view_sys_user
 -- ----------------------------
 DROP VIEW IF EXISTS `view_sys_user`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`ctl`@`%` SQL SECURITY DEFINER VIEW `view_sys_user` AS select `su`.`id` AS `id`,`su`.`loginname` AS `loginname`,`su`.`name` AS `name`,`su`.`password` AS `password`,`su`.`customer_id` AS `customer_id`,`su`.`sex` AS `sex`,`su`.`age` AS `age`,`su`.`usertype` AS `usertype`,`su`.`isdefault` AS `isdefault`,`su`.`state` AS `state`,`su`.`organization_id` AS `organization_id`,`su`.`createdatetime` AS `createdatetime`,`su`.`phone` AS `phone`,`so`.`name` AS `organizationName` from (`sys_user` `su` left join `sys_organization` `so` on(`su`.`organization_id` = `so`.`id`)) ;
+create view view_sys_user as select su.*,so.`name` as organizationName from sys_user su LEFT JOIN sys_organization so on su.organization_id=so.id
