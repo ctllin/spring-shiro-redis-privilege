@@ -16,6 +16,15 @@
             <value>
                 /system/captcha=anon
                 /static/**=anon
+                /style/**=anon
+                /jslib/**=anon
+                /index=anon
+<!--
+                //ctl modify 首页地址
+-->
+                /admin/index=anon
+                /admin/login=anon
+                /login=anon
                 /system/logout = anon
                 /system/login=anon
                 /oauth/**=anon
