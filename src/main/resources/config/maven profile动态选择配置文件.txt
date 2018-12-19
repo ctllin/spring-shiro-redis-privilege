@@ -1,21 +1,21 @@
 resources/config/appclication-dev.properties   配置如下：
 profile.env=dev
 env.datasource.driver=com.mysql.cj.jdbc.Driver
-env.datasource.jdbcUrl=jdbc:mysql://192.168.42.29:3306/dev?useUnicode=true&characterEncoding=utf-8&useSSL=false
+env.datasource.jdbcUrl=jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&characterEncoding=utf-8&useSSL=false
 env.datasource.username=ctl
 env.datasource.password=liebe
 
 resources/config/appclication-proc.properties   配置如下：
 profile.env=proc
 env.datasource.driver=com.mysql.cj.jdbc.Driver
-env.datasource.jdbcUrl=jdbc:mysql://192.168.42.29:3306/proc?useUnicode=true&characterEncoding=utf-8&useSSL=false
+env.datasource.jdbcUrl=jdbc:mysql://127.0.0.1:3306/proc?useUnicode=true&characterEncoding=utf-8&useSSL=false
 env.datasource.username=ctl
 env.datasource.password=liebe
 
 resources/config/appclication-test.properties   配置如下：
 profile.env=test
 env.datasource.driver=com.mysql.cj.jdbc.Driver
-env.datasource.jdbcUrl=jdbc:mysql://192.168.42.29:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+env.datasource.jdbcUrl=jdbc:mysql://127.0.0.1:3306/manager?useUnicode=true&characterEncoding=utf-8&useSSL=false
 env.datasource.username=ctl
 env.datasource.password=liebe
 
@@ -29,21 +29,21 @@ jdbc.password=${env.datasource.password}
 执行mvn compile -P proc 后target编译后的额config.properties变更为：
 env=proc
 jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://192.168.42.29:3306/proc?useUnicode=true&characterEncoding=utf-8&useSSL=false
+jdbc.url=jdbc:mysql://127.0.0.1:3306/proc?useUnicode=true&characterEncoding=utf-8&useSSL=false
 jdbc.username=ctl
 jdbc.password=liebe
 
 执行mvn compile -P test 后target编译后的额config.properties变更为：
 env=test
 jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://192.168.42.29:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+jdbc.url=jdbc:mysql://127.0.0.1:3306/manager?useUnicode=true&characterEncoding=utf-8&useSSL=false
 jdbc.username=ctl
 jdbc.password=liebe
 
 执行mvn compile -P dev 后target编译后的额config.properties变更为：
 env=dev
 jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://192.168.42.29:3306/dev?useUnicode=true&characterEncoding=utf-8&useSSL=false
+jdbc.url=jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&characterEncoding=utf-8&useSSL=false
 jdbc.username=ctl
 jdbc.password=liebe
 

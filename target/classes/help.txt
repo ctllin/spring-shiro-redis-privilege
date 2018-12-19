@@ -1,0 +1,8 @@
+#根据json 生成javabean
+http://www.bejson.com/json2javapojo/  
+#支付宝api列表
+https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.3NcT4v&treeId=193&articleId=105900&docType=1
+https://github.com/kaola-thirdpart/netease-kaola-thirdpart/wiki
+https://github.com/kaola-thirdpart/netease-kaola-thirdpart/tree/master/test%E7%A4%BA%E4%BE%8B/src/test/java/com/netease/haitao/thirdpart/newtest
+#微信支付api地址
+https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1
