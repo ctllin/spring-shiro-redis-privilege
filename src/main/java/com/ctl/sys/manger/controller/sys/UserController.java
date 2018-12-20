@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
@@ -54,6 +55,7 @@ public class UserController extends BaseController {
 		return "/admin/user";
 	}
 
+	@RequiresPermissions({"/user:dataGrid","/user:manager"})
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public Grid dataGrid(User user) {

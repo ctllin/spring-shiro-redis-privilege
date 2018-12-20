@@ -40,7 +40,7 @@ public class RoleController extends BaseController {
 		return "/admin/role";
 	}
 	@ResponseBody
-	@RequiresPermissions({"/role:treeGrid","/role:manager"})
+	@RequiresPermissions({"/role:dataGrid","/role:manager"})
 	@RequestMapping("/dataGrid")
 	public Grid dataGrid(Role role, PageFilter ph) {
 		Grid grid = new Grid();

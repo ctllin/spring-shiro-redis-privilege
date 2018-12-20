@@ -41,7 +41,7 @@ public class ShiroRealm extends AuthorizingRealm {
     private RedisTemplate<Object, Object> redisTemplate;
 
     /**
-     * 鉴权信息
+     * 鉴权信息 重新登录后会重新调用此接口
      *
      * @param principalCollection
      * @return
