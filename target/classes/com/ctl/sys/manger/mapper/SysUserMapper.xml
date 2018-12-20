@@ -6,6 +6,7 @@
     <result column="loginname" jdbcType="VARCHAR" property="loginname" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="password_salt" jdbcType="VARCHAR" property="password_salt" />
     <result column="customer_id" jdbcType="INTEGER" property="customer_id" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="age" jdbcType="INTEGER" property="age" />
@@ -77,7 +78,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, loginname, name, password, customer_id, sex, age, usertype, isdefault, state, 
+    id, loginname, name, password,password_salt, customer_id, sex, age, usertype, isdefault, state,
     organization_id, createdatetime, phone,organizationName
   </sql>
   <select id="selectByExample" parameterType="com.ctl.sys.manger.po.SysUserExample" resultMap="BaseResultMap">
@@ -145,9 +146,33 @@
 	LEFT JOIN sys_organization so on su.organization_id=so.id
 		WHERE su.id = #{userId,jdbcType=INTEGER} 
   </select>
-  
-  
-  
+  <select id="getRolesByUserId" parameterType="java.lang.Integer" resultType="com.ctl.sys.manger.model.sys.Trole">
+    SELECT DISTINCT
+      sr.id,
+      sr. NAME,
+      sr.description
+    FROM
+      sys_user_role sur
+      LEFT JOIN sys_role sr ON sur.role_id = sr.id
+    WHERE
+      sur.user_id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getPermissionsByUserId" parameterType="java.lang.Integer" resultType="com.ctl.sys.manger.model.sys.Tresource">
+    SELECT
+      sr.id,
+      sr.`name`,
+      sr.url,
+      sr.description,
+      sr.pid
+    FROM
+      sys_user_role sur
+      LEFT JOIN sys_role_resource srr ON sur.role_id = srr.role_id
+      LEFT JOIN sys_resource sr ON srr.resource_id = sr.id
+    WHERE
+      sur.user_id =  #{id,jdbcType=INTEGER}
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
@@ -186,6 +211,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="password_salt != null">
+        password_salt,
       </if>
       <if test="customer_id != null">
         customer_id,
@@ -227,6 +255,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="password_salt != null">
+        #{password_salt,jdbcType=VARCHAR},
       </if>
       <if test="customer_id != null">
         #{customer_id,jdbcType=INTEGER},
@@ -278,6 +309,9 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.password_salt != null">
+        password_salt = #{record.password_salt,jdbcType=VARCHAR},
+      </if>
       <if test="record.customer_id != null">
         customer_id = #{record.customer_id,jdbcType=INTEGER},
       </if>
@@ -316,6 +350,7 @@
       loginname = #{record.loginname,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      password_salt = #{record.password_salt,jdbcType=VARCHAR},
       customer_id = #{record.customer_id,jdbcType=INTEGER},
       sex = #{record.sex,jdbcType=INTEGER},
       age = #{record.age,jdbcType=INTEGER},
@@ -340,6 +375,9 @@
       </if>
       <if test="password != null and password!='' ">
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="password_salt != null and password_salt!='' ">
+        password_salt = #{password_salt,jdbcType=VARCHAR},
       </if>
       <if test="customer_id != null">
         customer_id = #{customer_id,jdbcType=INTEGER},
@@ -376,6 +414,7 @@
     set loginname = #{loginname,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      password_salt = #{password_salt,jdbcType=VARCHAR},
       customer_id = #{customer_id,jdbcType=INTEGER},
       sex = #{sex,jdbcType=INTEGER},
       age = #{age,jdbcType=INTEGER},

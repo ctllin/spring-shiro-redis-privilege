@@ -98,4 +98,10 @@ public class StringUtil {
         }
         return result.toString().toLowerCase();
     }
+
+    public static void main(String[] args) {
+        //String password = createPassword("liebe", "ctllin", 2);
+        String password = createPassword("liebe", "ctllin", 2);
+        System.out.println(password);
+    }
 }

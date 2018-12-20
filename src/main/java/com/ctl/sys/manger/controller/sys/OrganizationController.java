@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -42,9 +43,10 @@ public class OrganizationController extends BaseController {
 	}
 	@Autowired
 	private SysUserMapper sysUserMapper;
-	
-	@RequestMapping("/treeGrid")
+
 	@ResponseBody
+	@RequiresPermissions({"/organization:treeGrid","/organization:manager"})
+	@RequestMapping("/treeGrid")
 	public List<Organization> treeGrid() {
 		return sysOrganizationMapper.treeGrid(null);//mybatis
 		//return organizationService.treeGrid();

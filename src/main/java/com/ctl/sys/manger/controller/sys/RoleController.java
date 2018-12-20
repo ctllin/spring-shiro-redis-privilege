@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,9 +39,9 @@ public class RoleController extends BaseController {
 	public String manager() {
 		return "/admin/role";
 	}
-
-	@RequestMapping("/dataGrid")
 	@ResponseBody
+	@RequiresPermissions({"/role:treeGrid","/role:manager"})
+	@RequestMapping("/dataGrid")
 	public Grid dataGrid(Role role, PageFilter ph) {
 		Grid grid = new Grid();
 		//mybatis start

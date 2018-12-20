@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -121,9 +123,9 @@ public class ResourceController extends BaseController {
 		//mybatis stop
 		//return resourceService.listAllTree(flag);
 	}
-
-	@RequestMapping("/treeGrid")
 	@ResponseBody
+	@RequiresPermissions({"/resource:treeGrid","/organization:manager"})
+	@RequestMapping("/treeGrid")
 	public List<Resource> treeGrid() {
 		return sysResourceMapper.treeGrid(null);//mybatis
 		//return resourceService.treeGrid();

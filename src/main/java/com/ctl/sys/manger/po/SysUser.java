@@ -156,4 +156,25 @@ public class SysUser implements Serializable {
     public void setPassword_salt(String password_salt) {
         this.password_salt = password_salt;
     }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", loginname='" + loginname + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", password_salt='" + password_salt + '\'' +
+                ", customer_id=" + customer_id +
+                ", sex=" + sex +
+                ", age=" + age +
+                ", usertype=" + usertype +
+                ", isdefault=" + isdefault +
+                ", state=" + state +
+                ", organization_id=" + organization_id +
+                ", createdatetime=" + createdatetime +
+                ", phone='" + phone + '\'' +
+                ", organizationName='" + organizationName + '\'' +
+                '}';
+    }
 }

@@ -1,5 +1,7 @@
 package com.ctl.sys.manger.mapper;
 
+import com.ctl.sys.manger.model.sys.Tresource;
+import com.ctl.sys.manger.model.sys.Trole;
 import com.ctl.sys.manger.model.sys.Tuser;
 import com.ctl.sys.manger.po.SysUser;
 import com.ctl.sys.manger.po.SysUserExample;
@@ -32,4 +34,9 @@ public interface SysUserMapper {
 	List<String> selectUrl(Integer id);
 
 	Tuser selectUserUserroleRole(Map<String,Object> map);
+
+    List<Trole> getRolesByUserId(Integer id);
+
+    List<Tresource> getPermissionsByUserId(Integer id);
+
 }

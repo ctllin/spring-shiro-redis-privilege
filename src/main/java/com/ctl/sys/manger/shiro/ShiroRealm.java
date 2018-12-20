@@ -2,9 +2,14 @@ package com.ctl.sys.manger.shiro;
 
 import com.ctl.sys.manger.mapper.SysRoleMapper;
 import com.ctl.sys.manger.mapper.SysUserMapper;
+import com.ctl.sys.manger.model.sys.Tresource;
+import com.ctl.sys.manger.model.sys.Trole;
+import com.ctl.sys.manger.model.sys.Tuser;
 import com.ctl.sys.manger.po.SysRole;
 import com.ctl.sys.manger.po.SysUser;
+import com.ctl.sys.manger.po.SysUserExample;
 import com.ctl.sys.manger.shiro.util.SystemConstant;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,8 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: ouyangan
@@ -45,8 +49,29 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         log.debug("开始查询授权信息");
+        SysUser sysUser = null;
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         String loginStr = (String) principalCollection.getPrimaryPrincipal();
+        SysUserExample sysUserExample = new SysUserExample();
+        sysUserExample.createCriteria().andLoginnameEqualTo(loginStr);
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
+        if(sysUsers!=null&&sysUsers.size()>=1){
+            sysUser=sysUsers.get(0);
+        }
+        Set<String> permissions = new TreeSet<>();
+        Set<String> roles = new TreeSet<>();
+        List<Trole> rolesByUserId = sysUserMapper.getRolesByUserId(sysUser.getId());
+        List<Tresource> permissionsByUserId = sysUserMapper.getPermissionsByUserId(sysUser.getId());
+        for(Trole role:rolesByUserId){
+            roles.add(role.getName());
+        }
+        for(Tresource tresource:permissionsByUserId) {
+            if (tresource.getUrl() != null && !"".equals(tresource.getUrl())) {
+                int index = tresource.getUrl().lastIndexOf("/");
+                tresource.setUrl(tresource.getUrl().substring(0, index) + ":" + tresource.getUrl().substring(index + 1));
+                permissions.add(tresource.getUrl());
+            }
+        }
 //        SysUser user = sysUserMapper.selectUserByLoginName(loginStr);
 //        List<SysUserPermission> userPermissions = sysUserPermissionMapper.selectByUserId(user.getId());
 //        Set<String> permissions = new HashSet<>();
@@ -66,10 +91,10 @@ public class ShiroRealm extends AuthorizingRealm {
 //                permissions.add(sysPermission.getCode());
 //            }
 //        }
-//        info.addRoles(roles);
-//        info.addStringPermissions(permissions);
-//        log.debug("角色信息: \n {}", roles.toString());
-//        log.debug("权限信息: \n{}", permissions.toString());
+        info.addRoles(roles);
+        info.addStringPermissions(permissions);
+        log.debug("角色信息: \n {}", Arrays.deepToString(roles.toArray()));
+        log.debug("权限信息: \n{}", Arrays.deepToString(permissions.toArray()));
         return info;
     }
 
@@ -85,6 +110,12 @@ public class ShiroRealm extends AuthorizingRealm {
         log.debug("登录验证");
         String loginName = (String) authenticationToken.getPrincipal();
         SysUser sysUser = null;//sysUserMapper.selectUserByLoginName(loginName);
+        SysUserExample sysUserExample = new SysUserExample();
+        sysUserExample.createCriteria().andLoginnameEqualTo(loginName);
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
+        if(sysUsers!=null&&sysUsers.size()>=1){
+            sysUser=sysUsers.get(0);
+        }
         AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(loginName, sysUser.getPassword(), ByteSource.Util.bytes(sysUser.getPassword_salt()), getName());
         return authenticationInfo;
     }
@@ -97,6 +128,8 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected void clearCachedAuthorizationInfo(PrincipalCollection principals) {
         log.debug("clearCachedAuthorizationInfo");
+        super.clearCachedAuthorizationInfo(principals);
+        //this.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
     }
 
 }

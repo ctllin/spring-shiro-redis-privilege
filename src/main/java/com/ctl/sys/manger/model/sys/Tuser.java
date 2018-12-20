@@ -13,6 +13,7 @@ public class Tuser extends IdEntity implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String loginname; // 登录名
 	private String password; // 密码
+	private String password_salt; // 密码
 	private String name; // 姓名
 	private Integer sex; // 性别
 	private Integer age; // 年龄
@@ -154,4 +155,11 @@ public class Tuser extends IdEntity implements java.io.Serializable {
 		this.supplierguid = supplierguid;
 	}
 
+	public String getPassword_salt() {
+		return password_salt;
+	}
+
+	public void setPassword_salt(String password_salt) {
+		this.password_salt = password_salt;
+	}
 }

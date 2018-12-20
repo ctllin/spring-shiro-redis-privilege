@@ -3,6 +3,10 @@ package com.ctl.sys.manger.controller.sys;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,17 +40,18 @@ public class IndexController extends BaseController {
 	private SysUserRoleMapper sysUserRoleMapper;
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request) {
-		SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(GlobalConstant.SESSION_INFO);
-		if ((sessionInfo != null) && (sessionInfo.getId() != null)) {
+//		SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(GlobalConstant.SESSION_INFO);
+//		if ((sessionInfo != null) && (sessionInfo.getId() != null)) {
 			return "/index";
-		}
-		return "/login";
+//		}
+//		return "/login";
 	}
 
 	@ResponseBody
 	@RequestMapping("/login")
 	public Json login(User user, HttpSession session) {
 		Json j = new Json();
+		String password = user.getPassword();
 		User sysuser = getUser(user);//userService.login(user);
 		if (sysuser != null) {
 			j.setSuccess(true);
@@ -64,6 +69,9 @@ public class IndexController extends BaseController {
 			sessionInfo.setResourceList(listResource(sysuser.getId()));//mybatis
 			sessionInfo.setResourceAllList(listAllResource());//mybatis
 			session.setAttribute(GlobalConstant.SESSION_INFO, sessionInfo);
+			Subject subject = SecurityUtils.getSubject();
+			subject.login(new UsernamePasswordToken(sysuser.getLoginname(), password));
+			subject.getSession().setAttribute("loginInfo", sessionInfo);
 		} else {
 			j.setMsg("用户名或密码错误！");
 		}
@@ -79,6 +87,7 @@ public class IndexController extends BaseController {
 		}
 		j.setSuccess(true);
 		j.setMsg("注销成功！");
+		SecurityUtils.getSubject().logout();
 		return j;
 	}
 	//根据user id 获取权限
@@ -90,7 +99,7 @@ public class IndexController extends BaseController {
 	public User getUser(User user) {
 		SysUserExample sysUserExample=new SysUserExample();
 		//state 0启用 1 停用  停用用户不能登录
-		sysUserExample.createCriteria().andLoginnameEqualTo(user.getLoginname()).andPasswordEqualTo(MD5Util.md5(user.getPassword())).andStateEqualTo(0);
+		sysUserExample.createCriteria().andLoginnameEqualTo(user.getLoginname()).andStateEqualTo(0);
 		List<SysUser> selectByExample = sysUserMapper.selectByExample(sysUserExample);
 		if(selectByExample!=null&&selectByExample.size()>=1){
 			BeanUtils.copyProperties(selectByExample.get(0), user);
