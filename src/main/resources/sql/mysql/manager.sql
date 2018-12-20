@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2018-12-19 18:06:25
+Date: 2018-12-20 16:26:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `sys_data_dictionary` (
   `savetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_sys_data_dictionary_keyz_unique` (`keyz`,`indexz`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of sys_data_dictionary
@@ -46,7 +46,7 @@ CREATE TABLE `sys_err_mess` (
   `errMess` text,
   `savetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of sys_err_mess
@@ -65,7 +65,7 @@ CREATE TABLE `sys_execute_sh` (
   `updatetime` datetime DEFAULT NULL,
   `savetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of sys_execute_sh
@@ -83,7 +83,7 @@ CREATE TABLE `sys_operate_log` (
   `url` varchar(65) DEFAULT NULL,
   `savetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43112 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of sys_operate_log
@@ -182,7 +182,7 @@ CREATE TABLE `sys_role` (
   `updatetime` datetime DEFAULT NULL,
   `savetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
@@ -190,6 +190,7 @@ CREATE TABLE `sys_role` (
 INSERT INTO `sys_role` VALUES ('1', '超级管理员', '0', '超级管理员，拥有全部权限', '0', null, null);
 INSERT INTO `sys_role` VALUES ('15', '部门管理员', '2', '部门管理员', '1', null, null);
 INSERT INTO `sys_role` VALUES ('16', '用户管理员', '3', '用户管理员', '1', null, null);
+INSERT INTO `sys_role` VALUES ('17', '资源管理', '3', '资源管理', '1', null, null);
 
 -- ----------------------------
 -- Table structure for sys_role_resource
@@ -248,6 +249,11 @@ INSERT INTO `sys_role_resource` VALUES ('16', '132');
 INSERT INTO `sys_role_resource` VALUES ('16', '133');
 INSERT INTO `sys_role_resource` VALUES ('16', '134');
 INSERT INTO `sys_role_resource` VALUES ('16', '135');
+INSERT INTO `sys_role_resource` VALUES ('17', '11');
+INSERT INTO `sys_role_resource` VALUES ('17', '111');
+INSERT INTO `sys_role_resource` VALUES ('17', '112');
+INSERT INTO `sys_role_resource` VALUES ('17', '113');
+INSERT INTO `sys_role_resource` VALUES ('17', '114');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -276,8 +282,8 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '超级管理员', 'cd92a26534dba48cd785cdcc0b3e6bd1', null, null, '0', '18', '0', '0', '0', '1', '2012-06-04 01:00:00', null, null);
-INSERT INTO `sys_user` VALUES ('36', 'ctl', 'ctl', 'eb755ccf2e8fa968a9db849abef02038', null, null, '0', null, '1', '1', '0', '1', '2018-12-19 18:01:11', '', null);
+INSERT INTO `sys_user` VALUES ('1', 'admin', '超级管理员', 'b7e2e951d6e1003c108d5726db81b66f', 'ctllin', null, '0', '18', '0', '0', '0', '1', '2012-06-04 01:00:00', null, null);
+INSERT INTO `sys_user` VALUES ('36', 'ctl', 'ctl', 'b7e2e951d6e1003c108d5726db81b66f', 'ctllin', null, '0', null, '1', '1', '0', '1', '2018-12-19 18:01:11', '', 'eb755ccf2e8fa968a9db849abef02038');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -295,9 +301,10 @@ CREATE TABLE `sys_user_role` (
 INSERT INTO `sys_user_role` VALUES ('1', '1');
 INSERT INTO `sys_user_role` VALUES ('36', '15');
 INSERT INTO `sys_user_role` VALUES ('36', '16');
+INSERT INTO `sys_user_role` VALUES ('36', '17');
 
 -- ----------------------------
 -- View structure for view_sys_user
 -- ----------------------------
 DROP VIEW IF EXISTS `view_sys_user`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_sys_user` AS select `su`.`id` AS `id`,`su`.`loginname` AS `loginname`,`su`.`name` AS `name`,`su`.`password` AS `password`,`su`.`customer_id` AS `customer_id`,`su`.`sex` AS `sex`,`su`.`age` AS `age`,`su`.`usertype` AS `usertype`,`su`.`isdefault` AS `isdefault`,`su`.`state` AS `state`,`su`.`organization_id` AS `organization_id`,`su`.`createdatetime` AS `createdatetime`,`su`.`phone` AS `phone`,`so`.`name` AS `organizationName` from (`sys_user` `su` left join `sys_organization` `so` on((`su`.`organization_id` = `so`.`id`))) ;
+CREATE VIEW `view_sys_user` AS select `su`.`id` AS `id`,`su`.`loginname` AS `loginname`,`su`.`name` AS `name`,`su`.`password` AS `password`,`su`.`password_salt` AS `password_salt`,`su`.`customer_id` AS `customer_id`,`su`.`sex` AS `sex`,`su`.`age` AS `age`,`su`.`usertype` AS `usertype`,`su`.`isdefault` AS `isdefault`,`su`.`state` AS `state`,`su`.`organization_id` AS `organization_id`,`su`.`createdatetime` AS `createdatetime`,`su`.`phone` AS `phone`,`so`.`name` AS `organizationName` from (`sys_user` `su` left join `sys_organization` `so` on((`su`.`organization_id` = `so`.`id`))) ;
