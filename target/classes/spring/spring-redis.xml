@@ -14,7 +14,7 @@
     </bean>
     <!--redis config-->
     <bean id="jedisFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:hostName="192.168.3.117" p:port="6379" p:password="123456"
+          p:hostName="192.168.3.117" p:port="6379" p:password="123456" p:database="5"
           p:poolConfig-ref="jedisPoolConfig">
     </bean>
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
