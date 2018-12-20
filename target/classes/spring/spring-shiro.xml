@@ -10,7 +10,7 @@
             <map>
                 <!--<entry key="authc" value-ref="authorizationFilter"/>-->
                 <entry key="authc" value-ref="authenticationFilter"/>
-                <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
+               <!-- <entry key="kickout" value-ref="kickoutSessionControlFilter"/>-->
             </map>
         </property>
         <property name="filterChainDefinitions">
@@ -35,7 +35,7 @@
                 /swagger-resources/**=anon
                 /swagger-ui.html/**=anon
                 /system/welcome=authc
-                /**=authc,kickout
+                /**=authc
             </value>
         </property>
     </bean>
