@@ -32,6 +32,7 @@ com\ctl\sys\manger\utils\SendMsgUtil.class
 com\ctl\ftp\FileUtil.class
 com\ctl\sys\manger\pageModel\sys\Organization.class
 com\ctl\sys\manger\controller\sys\ResourceController$CanDeleteRes.class
+com\ctl\sys\manger\shiro\filter\KickoutSessionControlFilter.class
 com\ctl\sys\manger\framework\exception\RestException.class
 com\ctl\sys\manger\po\SysResource.class
 com\ctl\common\util\DesUtils.class

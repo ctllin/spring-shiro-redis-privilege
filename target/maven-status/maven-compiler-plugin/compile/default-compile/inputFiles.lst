@@ -4,6 +4,7 @@ F:\github\spring-shiro-redis-privilege\src\main\java\Test.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\mapper\SysRoleMapper.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\mapper\SysOrganizationMapper.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\po\SysUser.java
+F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\filter\KickoutSessionControlFilter.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\util\DataStatus.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\common\po\SysExportNames.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\utils\DateUtil.java
