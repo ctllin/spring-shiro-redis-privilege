@@ -21,7 +21,7 @@
             <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n</pattern> -->
              <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{50}-%msg%n</pattern>   
             <immediateFlush>true</immediateFlush>
-			<charset class="java.nio.charset.Charset">gbk</charset>   
+			<charset class="java.nio.charset.Charset">UTF-8</charset>
         </encoder> 
     </appender>
     <!-- 按照每天生成日志文件 -->   

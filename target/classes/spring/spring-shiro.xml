@@ -8,7 +8,7 @@
         <property name="loginUrl" value="/"/>
         <property name="filters">
             <map>
-                <!--<entry key="authc" value-ref="authorizationFilter"/>-->
+                 <entry key="authz" value-ref="authorizationFilter"/>
                 <entry key="authc" value-ref="authenticationFilter"/>
                <!-- <entry key="kickout" value-ref="kickoutSessionControlFilter"/>-->
             </map>
@@ -35,7 +35,7 @@
                 /swagger-resources/**=anon
                 /swagger-ui.html/**=anon
                 /system/welcome=authc
-                /**=authc
+                /**=authc,authz
             </value>
         </property>
     </bean>
@@ -82,7 +82,7 @@
         <property name="sessionDAO" ref="redisSessionDAO"/>
     </bean>
 
-    <!--<bean id="authorizationFilter" class="com.ctl.sys.manger.shiro.ShiroAuthorizationFilter"/>-->
+    <bean id="authorizationFilter" class="com.ctl.sys.manger.shiro.ShiroAuthorizationFilter"/>
     <bean id="authenticationFilter" class="com.ctl.sys.manger.shiro.ShiroAuthenticationFilter"/>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
@@ -91,5 +91,9 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
+    <!-- 控制器异常处理 -->
+    <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
+    </bean>
 
+    <bean class="com.ctl.sys.manger.shiro.exception.DefaultExceptionHandler"/>
 </beans>

@@ -8854,3 +8854,18 @@ Caused by: java.lang.IllegalArgumentException: Mapped Statements collection alre
 2018-12-21 11:19:13 DEBUG d.c.c.s.m.mapper.SysUserMapper.getResourcsByUserId-<==      Total: 1
 2018-12-21 11:19:13 DEBUG org.mybatis.spring.SqlSessionUtils-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4566d049]
 2018-12-21 11:19:13 DEBUG o.springframework.jdbc.datasource.DataSourceUtils-Returning JDBC Connection to DataSource
+2018-12-21 14:23:10 ERROR c.c.s.m.shiro.exception.DefaultExceptionHandler-没有权限访问该接口地址=saf
+java.lang.Exception: asdff
+	at com.ctl.sys.manger.shiro.exception.DefaultExceptionHandler.main(DefaultExceptionHandler.java:42)
+2018-12-21 14:23:41 ERROR c.c.s.m.shiro.exception.DefaultExceptionHandler-没有权限访问该接口地址=ctl
+java.lang.Exception: 自定义异常
+	at com.ctl.sys.manger.shiro.exception.DefaultExceptionHandler.main(DefaultExceptionHandler.java:42)
+2018-12-21 14:24:15 ERROR c.c.s.m.shiro.exception.DefaultExceptionHandler-没有权限访问该接口地址=ctl
+java.lang.Exception: 自定义异常
+	at com.ctl.sys.manger.shiro.exception.DefaultExceptionHandler.main(DefaultExceptionHandler.java:42)
+2018-12-21 14:24:29 ERROR c.c.s.m.shiro.exception.DefaultExceptionHandler-没有权限访问该接口地址=ctl,sdff
+java.lang.Exception: 自定义异常
+	at com.ctl.sys.manger.shiro.exception.DefaultExceptionHandler.main(DefaultExceptionHandler.java:42)
+2018-12-21 14:39:14 ERROR c.c.s.m.shiro.exception.DefaultExceptionHandler-没有权限访问该接口地址=ctl,sdff
+java.lang.Exception: 自定义异常
+	at com.ctl.sys.manger.shiro.exception.DefaultExceptionHandler.main(DefaultExceptionHandler.java:42)
