@@ -4,16 +4,11 @@ import com.ctl.sys.manger.mapper.SysRoleMapper;
 import com.ctl.sys.manger.mapper.SysUserMapper;
 import com.ctl.sys.manger.model.sys.Tresource;
 import com.ctl.sys.manger.model.sys.Trole;
-import com.ctl.sys.manger.model.sys.Tuser;
-import com.ctl.sys.manger.po.SysRole;
 import com.ctl.sys.manger.po.SysUser;
 import com.ctl.sys.manger.po.SysUserExample;
 import com.ctl.sys.manger.shiro.util.SystemConstant;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -27,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-
 import java.util.*;
 
 /**
@@ -46,7 +40,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
     /**
      * 鉴权信息 重新登录后会重新调用此接口
-     *
+     * 表示根据用户身份获取授权信息
      * @param principalCollection
      * @return
      */
@@ -104,7 +98,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
     /**
      * 登录验证
-     *
+     * 表示获取身份验证信息
      * @param authenticationToken
      * @return
      * @throws AuthenticationException
@@ -144,5 +138,4 @@ public class ShiroRealm extends AuthorizingRealm {
         super.clearCachedAuthorizationInfo(principals);
         //this.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
     }
-
 }

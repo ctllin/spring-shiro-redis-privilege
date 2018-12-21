@@ -9,32 +9,20 @@
         <property name="filters">
             <map>
                  <entry key="authz" value-ref="authorizationFilter"/>
-                <entry key="authc" value-ref="authenticationFilter"/>
+                 <entry key="authc" value-ref="authenticationFilter"/>
+                 <entry key="perms" value-ref="permissionFilter"/>
                <!-- <entry key="kickout" value-ref="kickoutSessionControlFilter"/>-->
             </map>
         </property>
         <property name="filterChainDefinitions">
             <value>
-                /system/captcha=anon
-                /static/**=anon
                 /style/**=anon
                 /jslib/**=anon
-<!--
-                //ctl modify 首页地址
-                /admin/index=anon
--->
                 /admin/login=anon
                 /admin/logout=anon
-                /login=anon
-                /system/logout = anon
-                /system/login=anon
+                /admin/index=anon
                 /oauth/**=anon
                 /error/**=anon
-                /v2/**/=anon
-                /webjars/**=anon
-                /swagger-resources/**=anon
-                /swagger-ui.html/**=anon
-                /system/welcome=authc
                 /**=authc,authz
             </value>
         </property>
@@ -77,17 +65,19 @@
     </bean>
 
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-        <property name="globalSessionTimeout" value="2592000000"/>
+        <property name="globalSessionTimeout" value="60000"/><!--ms-->
         <property name="sessionValidationSchedulerEnabled" value="true"/>
         <property name="sessionDAO" ref="redisSessionDAO"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
     </bean>
 
     <bean id="authorizationFilter" class="com.ctl.sys.manger.shiro.ShiroAuthorizationFilter"/>
     <bean id="authenticationFilter" class="com.ctl.sys.manger.shiro.ShiroAuthenticationFilter"/>
+    <bean id="permissionFilter" class="com.ctl.sys.manger.shiro.filter.PermissionFilter"/>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"  depends-on="lifecycleBeanPostProcessor"/>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>

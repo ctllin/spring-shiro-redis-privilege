@@ -1,3 +1,4 @@
+com\ctl\sys\manger\controller\sys\CommonBaseController.class
 com\ctl\sys\manger\mapper\SysResourceMapper.class
 com\ctl\sys\manger\pageModel\base\SessionInfo.class
 com\ctl\ftp\Tat.class
@@ -48,6 +49,7 @@ com\ctl\common\util\HttpClientUtil.class
 com\ctl\ftp\GZIPUtils.class
 com\ctl\sys\manger\po\SysUserRoleKey.class
 com\ctl\ftp\BeanConverter.class
+com\ctl\sys\manger\shiro\filter\PermissionFilter.class
 com\ctl\common\util\RSASignUtils.class
 com\ctl\sys\manger\pageModel\demo\Demo.class
 com\ctl\sys\manger\po\SysUserRoleExample.class
@@ -66,7 +68,6 @@ com\ctl\sys\manger\po\SysResourceExample$GeneratedCriteria.class
 com\ctl\ftp\DesUtils.class
 com\ctl\sys\manger\po\SysRoleResourceExample$GeneratedCriteria.class
 com\ctl\sys\manger\po\SysRoleResourceKey.class
-com\ctl\sys\manger\controller\sys\BaseController.class
 com\ctl\ftp\JsonUtil.class
 com\ctl\sys\manger\po\SysRole.class
 com\ctl\sys\manger\model\sys\Tresource.class

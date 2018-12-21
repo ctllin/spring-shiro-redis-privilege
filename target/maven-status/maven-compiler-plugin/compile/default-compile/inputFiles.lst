@@ -5,6 +5,7 @@ F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\Re
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\mapper\SysResourceMapper.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\controller\base\BaseController.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\model\base\IdEntityORACLE.java
+F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\filter\PermissionFilter.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\po\SysRoleResourceExample.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\ftp\DateUtil.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\mapper\SysRoleResourceMapper.java
@@ -14,6 +15,7 @@ F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\ut
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\common\util\StringUtil.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\common\util\JsonNumberValueProcessor.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\ShiroAuthenticationFilter.java
+F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\controller\sys\CommonBaseController.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\pageModel\sys\User.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\ftp\BeanUtil.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\utils\ConfigUtils.java
@@ -41,7 +43,6 @@ F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\po\SysUs
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\model\base\IdEntity.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\util\StringUtil.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\common\util\DateUtil.java
-F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\controller\sys\BaseController.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\common\util\ExcelUtils.java
 F:\github\spring-shiro-redis-privilege\src\main\java\Test.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\mapper\SysOrganizationMapper.java
