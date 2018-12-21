@@ -88,7 +88,7 @@ jdbc.password=liebe
         </includes>
       </resource>
       <resource>
-        <directory>F:\\github\\spring-shiro-redis-privilege/src/main/resources</directory>
+        <directory>F:/github/spring-shiro-redis-privilege/src/main/resources</directory>
         <filtering>true</filtering><!-- maven profile动态选择配置文件 -->
       </resource>
     </resources>

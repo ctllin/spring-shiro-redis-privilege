@@ -91,7 +91,11 @@ public class IndexController extends BaseController {
 		}
 		j.setSuccess(true);
 		j.setMsg("注销成功！");
-		SecurityUtils.getSubject().logout();
+		try {
+			SecurityUtils.getSubject().logout();
+		} catch (Exception e) {
+			logger.error("shiro注销登录失败",e);
+		}
 		return j;
 	}
 	//根据user id 获取权限
