@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisCache<K, V> implements Cache<K, V>, Serializable {
     public static final String shiro_cache_prefix = "shiro-cache-";
     public static final String shiro_cache_prefix_keys = "shiro-cache-*";
-    private static final long timeout = Integer.parseInt(ConfigUtils.getType("shiro.session.timeout"));
+    private static final long timeout = Integer.parseInt(ConfigUtils.getType("shiro.cache.timeout"));
     private transient static Logger log = LoggerFactory.getLogger(RedisCache.class);
 
     private transient RedisTemplate<K, V> redisTemplate;
