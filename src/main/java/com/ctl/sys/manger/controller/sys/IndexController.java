@@ -4,9 +4,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.ctl.sys.manger.shiro.util.StringUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,7 @@ import com.ctl.sys.manger.utils.MD5Util;
 @Controller
 @RequestMapping("/admin")
 public class IndexController extends BaseController {
+	private static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 //	@Autowired
 //	private UserServiceI userService;
@@ -97,6 +101,12 @@ public class IndexController extends BaseController {
 	
 		//获取用户是否存在
 	public User getUser(User user) {
+		String password=null;
+		if(user.getPassword()==null||"".equals(user.getPassword())){
+			return null;
+		}else{
+			password=user.getPassword();
+		}
 		SysUserExample sysUserExample=new SysUserExample();
 		//state 0启用 1 停用  停用用户不能登录
 		sysUserExample.createCriteria().andLoginnameEqualTo(user.getLoginname()).andStateEqualTo(0);
@@ -105,7 +115,14 @@ public class IndexController extends BaseController {
 			BeanUtils.copyProperties(selectByExample.get(0), user);
 			user.setId(selectByExample.get(0).getId());//short无法直接转long
 			user.setOrganizationId(selectByExample.get(0).getOrganization_id());//short无法直接转long
+			String passwordTmp = StringUtil.createPassword(password, user.getPassword_salt(), 2);
+			if(passwordTmp.equals(user.getPassword())){
+
 			return user;
+			}else {
+				logger.info("username={},password={}错误",user.getLoginname(),password);
+				return null;
+			}
 		}
 		return null;
 	}
