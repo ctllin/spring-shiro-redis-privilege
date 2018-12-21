@@ -23,8 +23,9 @@ import java.io.IOException;
  * @Author: ouyangan
  * @Date : 2016/10/8
  */
-public class BaseController {
-    private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
+@Component
+public class CommonBaseController {
+    private static final Logger logger = LoggerFactory.getLogger(CommonBaseController.class);
     //根据请求类型,响应不同类型
     @ExceptionHandler(Exception.class)
     public void exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) throws IOException {
