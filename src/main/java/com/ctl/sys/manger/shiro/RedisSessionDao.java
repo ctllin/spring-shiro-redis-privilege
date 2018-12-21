@@ -1,5 +1,6 @@
 package com.ctl.sys.manger.shiro;
 
+import com.ctl.sys.manger.utils.ConfigUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisSessionDao extends AbstractSessionDAO {
     private static final String sessionIdPrefix = "shiro-session-";
     private static final String sessionIdPrefix_keys = "shiro-session-*";
-    private static final long timeout = 2592000;
+    private static final long timeout = Integer.parseInt(ConfigUtils.getType("shiro.session.timeout"));
     private transient static Logger log = LoggerFactory.getLogger(RedisSessionDao.class);
     @Autowired
     private transient RedisTemplate<Serializable, Session> redisTemplate;

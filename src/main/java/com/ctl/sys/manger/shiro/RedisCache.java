@@ -1,5 +1,6 @@
 package com.ctl.sys.manger.shiro;
 
+import com.ctl.sys.manger.utils.ConfigUtils;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisCache<K, V> implements Cache<K, V>, Serializable {
     public static final String shiro_cache_prefix = "shiro-cache-";
     public static final String shiro_cache_prefix_keys = "shiro-cache-*";
-    private static final long timeout = 2592000;
+    private static final long timeout = Integer.parseInt(ConfigUtils.getType("shiro.session.timeout"));
     private transient static Logger log = LoggerFactory.getLogger(RedisCache.class);
 
     private transient RedisTemplate<K, V> redisTemplate;
