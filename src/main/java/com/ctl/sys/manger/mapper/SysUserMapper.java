@@ -1,5 +1,6 @@
 package com.ctl.sys.manger.mapper;
 
+import com.ctl.sys.manger.model.sys.Tprivileges;
 import com.ctl.sys.manger.model.sys.Tresource;
 import com.ctl.sys.manger.model.sys.Trole;
 import com.ctl.sys.manger.model.sys.Tuser;
@@ -39,4 +40,5 @@ public interface SysUserMapper {
 
     List<Tresource> getPermissionsByUserId(Integer id);
 
+    List<Tprivileges> getResourcsByUserId(Integer i);
 }

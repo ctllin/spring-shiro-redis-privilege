@@ -55,16 +55,16 @@
     <bean id="shiroRealm" class="com.ctl.sys.manger.shiro.ShiroRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
-    <!--kickoutSessionControlFilter 用于控制并发登录人数的-->
+    <!--
+     kickoutSessionControlFilter 用于控制并发登录人数的
     <bean id="kickoutSessionControlFilter"  class="com.ctl.sys.manger.shiro.filter.KickoutSessionControlFilter">
         <property name="cacheManager" ref="cacheManager"/>
         <property name="sessionManager" ref="sessionManager"/>
         <property name="kickoutAfter" value="false"/>
         <property name="maxSession" value="1"/>
         <property name="kickoutUrl" value="kickout=1"/>
-<!--
--->
     </bean>
+    -->
     <bean id="redisSessionDAO" class="com.ctl.sys.manger.shiro.RedisSessionDao"/>
     <bean id="cacheManager" class="com.ctl.sys.manger.shiro.RedisCacheManager">
         <property name="redisTemplate" ref="redisTemplate"/>

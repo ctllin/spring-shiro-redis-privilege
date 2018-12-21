@@ -1,3 +1,4 @@
+import com.ctl.common.util.StringUtil;
 import com.ctl.sys.manger.mapper.SysUserMapper;
 import com.ctl.sys.manger.po.SysUser;
 import com.ctl.sys.manger.po.SysUserExample;
@@ -38,7 +39,10 @@ public class OperateConfigServiceTest {
         // List<SysUser> selectByExample = sysUserMapper.selectByExample(sysUserExample);
        // System.out.println(selectByExample.get(0));
         //System.out.println(sysUserMapper.selectByPrimaryKey(36));
-        System.out.println(JSONArray.fromObject(sysUserMapper.getRolesByUserId(36)));
-        System.out.println(JSONArray.fromObject(sysUserMapper.getPermissionsByUserId(36)));
+      //  System.out.println(JSONArray.fromObject(sysUserMapper.getRolesByUserId(36)));
+       // System.out.println(JSONArray.fromObject(sysUserMapper.getPermissionsByUserId(36)));
+
+        System.out.println(StringUtil.formatJson(JSONArray.fromObject(sysUserMapper.getResourcsByUserId(36)).toString()));
+        System.out.println(JSONArray.fromObject(sysUserMapper.getResourcsByUserId(36)).toString());
     }
 }

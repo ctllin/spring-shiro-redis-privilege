@@ -426,4 +426,103 @@
       phone = #{phone,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <resultMap id="selectPrivilegesByUserId" type="com.ctl.sys.manger.model.sys.Tprivileges">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="resourcetype" jdbcType="INTEGER" property="resourcetype" />
+    <result column="createdatetime" jdbcType="TIMESTAMP" property="createdatetime" />
+    <collection property="tprivilegesList"  ofType="com.ctl.sys.manger.model.sys.Tprivileges" javaType="java.util.ArrayList" select="selectPrivilegesByPid" column="{uid=uid,pid=id}">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="url" jdbcType="VARCHAR" property="url" />
+      <result column="description" jdbcType="VARCHAR" property="description" />
+      <result column="icon" jdbcType="VARCHAR" property="icon" />
+      <result column="pid" jdbcType="INTEGER" property="pid" />
+      <result column="uid" jdbcType="INTEGER" property="uid" />
+      <result column="seq" jdbcType="INTEGER" property="seq" />
+      <result column="state" jdbcType="INTEGER" property="state" />
+      <result column="resourcetype" jdbcType="INTEGER" property="resourcetype" />
+      <result column="createdatetime" jdbcType="TIMESTAMP" property="createdatetime" />
+    </collection>
+</resultMap>
+
+  <select id="selectPrivilegesByPid" parameterType="map" resultMap="selectPrivilegesByUserId">
+      SELECT DISTINCT
+          sr.id,
+          sr.name,
+          sr.url,
+          sr.description,
+          sr.pid,
+          sr.resourcetype,
+          sr.hasChild,
+          <if test="uid!=null">
+           #{uid,jdbcType=INTEGER} as uid,
+          </if>
+          CASE
+          WHEN sr.resourcetype = 0
+              THEN
+                  'menu'
+          WHEN sr.resourcetype = 1
+              THEN
+                  'btn'
+          ELSE
+              0
+          END AS privilegez
+    FROM
+    sys_user_role sur
+    LEFT JOIN sys_role_resource srr ON sur.role_id = srr.role_id
+    LEFT JOIN sys_resource sr ON srr.resource_id = sr.id
+      WHERE 1=1
+      <if test="pid!=null">
+        and sr.pid = #{pid,jdbcType=INTEGER}
+      </if>
+      <if test="uid!=null">
+        and sur.user_id=#{uid,jdbcType=INTEGER}
+      </if>
+  </select>
+
+
+<select id="getResourcsByUserId" parameterType="java.lang.Integer" resultMap="selectPrivilegesByUserId">
+    SELECT
+        DISTINCT
+        sr.id,
+        sr.name,
+        sr.url,
+        sr.description,
+        sr.pid,
+        sr.resourcetype,
+        sr.hasChild,
+        #{id,jdbcType=INTEGER} as uid,
+        CASE
+        WHEN sr.resourcetype = 0
+            THEN
+                'menu'
+        WHEN sr.resourcetype = 1
+            THEN
+                'btn'
+        ELSE
+            0
+        END AS privilegez
+    FROM
+        sys_user_role sur
+        LEFT JOIN sys_role_resource srr ON sur.role_id = srr.role_id
+        LEFT JOIN sys_resource sr ON srr.resource_id = sr.id
+    WHERE
+        sur.user_id = #{id,jdbcType=INTEGER}
+        AND pid IS NULL
+    ORDER BY
+        url,
+        resourcetype ASC
+</select>
+
 </mapper>
