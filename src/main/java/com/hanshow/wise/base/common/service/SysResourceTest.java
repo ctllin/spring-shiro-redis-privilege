@@ -27,6 +27,8 @@ public class SysResourceTest {
         Map<String,Object> map = new HashMap<>();
         JsonConfig jsonConfig=new JsonConfig();
         SysResourceMapper sysResourceMapper = (SysResourceMapper) context.getBean("sysResourceMapper");
+        //System.out.println(sysResourceMapper.selectByPrimaryKey(1));
         System.out.println(StringUtil.formatJson(JSONArray.fromObject(sysResourceMapper.getSysResourceByUserId(36)).toString()));
+        System.out.println( JSONArray.fromObject(sysResourceMapper.getSysResourceByUserId(36)).toString() );
     }
 }

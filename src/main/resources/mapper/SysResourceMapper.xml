@@ -320,6 +320,7 @@
       createdatetime = #{createdatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--根据用户编号获取资源列表（上下级和按钮，递归）start -->
 
   <resultMap id="sysResourceMap" type="com.hanshow.wise.base.common.model.dto.SysResourceDto">
     <id column="id" jdbcType="INTEGER" property="id" />
@@ -371,9 +372,11 @@
     <if test="userId!=null">
       and sur.user_id=#{userId,jdbcType=INTEGER}
     </if>
+    order by
+    sr.seq asc,
+    sr.createdatetime ASC
   </select>
 
-  <!--根据用户编号获取资源列表（上下级和按钮，递归）start -->
   <select id="getSysResourceByUserId" parameterType="java.lang.Integer" resultMap="sysResourceMap">
     SELECT
     DISTINCT
@@ -403,8 +406,8 @@
     sur.user_id = #{id,jdbcType=INTEGER}
     AND pid IS NULL
     ORDER BY
-    url,
-    resourcetype ASC
+    sr.seq asc,
+    sr.createdatetime ASC
   </select>
   <!--根据用户编号获取资源列表（上下级和按钮，递归）end -->
 
