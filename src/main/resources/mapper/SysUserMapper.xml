@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanshow.wise.base.common.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.hanshow.wise.base.common.model.SysUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="loginname" jdbcType="VARCHAR" property="loginname" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="password_salt" jdbcType="VARCHAR" property="passwordSalt" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="usertype" jdbcType="INTEGER" property="usertype" />
+    <result column="isdefault" jdbcType="INTEGER" property="isdefault" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="organization_id" jdbcType="INTEGER" property="organizationId" />
+    <result column="createdatetime" jdbcType="TIMESTAMP" property="createdatetime" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="organizationName" jdbcType="VARCHAR" property="organizationname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, loginname, name, password, password_salt, customer_id, sex, age, usertype, isdefault, 
+    state, organization_id, createdatetime, phone, organizationName
+  </sql>
+  <select id="selectByExample" parameterType="com.hanshow.wise.base.common.model.SysUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hanshow.wise.base.common.model.SysUserExample">
+    delete from sys_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hanshow.wise.base.common.model.SysUser">
+    insert into sys_user (id, loginname, name, 
+      password, password_salt, customer_id, 
+      sex, age, usertype, 
+      isdefault, state, organization_id, 
+      createdatetime, phone, organizationName
+      )
+    values (#{id,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{passwordSalt,jdbcType=VARCHAR}, #{customerId,jdbcType=INTEGER}, 
+      #{sex,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, #{usertype,jdbcType=INTEGER}, 
+      #{isdefault,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{organizationId,jdbcType=INTEGER}, 
+      #{createdatetime,jdbcType=TIMESTAMP}, #{phone,jdbcType=VARCHAR}, #{organizationname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanshow.wise.base.common.model.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="loginname != null">
+        loginname,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="passwordSalt != null">
+        password_salt,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="usertype != null">
+        usertype,
+      </if>
+      <if test="isdefault != null">
+        isdefault,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="organizationId != null">
+        organization_id,
+      </if>
+      <if test="createdatetime != null">
+        createdatetime,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="organizationname != null">
+        organizationName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null">
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordSalt != null">
+        #{passwordSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null">
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="isdefault != null">
+        #{isdefault,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="organizationId != null">
+        #{organizationId,jdbcType=INTEGER},
+      </if>
+      <if test="createdatetime != null">
+        #{createdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationname != null">
+        #{organizationname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hanshow.wise.base.common.model.SysUserExample" resultType="java.lang.Long">
+    select count(*) from sys_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginname != null">
+        loginname = #{record.loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwordSalt != null">
+        password_salt = #{record.passwordSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.usertype != null">
+        usertype = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdefault != null">
+        isdefault = #{record.isdefault,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.organizationId != null">
+        organization_id = #{record.organizationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdatetime != null">
+        createdatetime = #{record.createdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationname != null">
+        organizationName = #{record.organizationname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_user
+    set id = #{record.id,jdbcType=INTEGER},
+      loginname = #{record.loginname,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      password_salt = #{record.passwordSalt,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=INTEGER},
+      usertype = #{record.usertype,jdbcType=INTEGER},
+      isdefault = #{record.isdefault,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=INTEGER},
+      organization_id = #{record.organizationId,jdbcType=INTEGER},
+      createdatetime = #{record.createdatetime,jdbcType=TIMESTAMP},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      organizationName = #{record.organizationname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanshow.wise.base.common.model.SysUser">
+    update sys_user
+    <set>
+      <if test="loginname != null">
+        loginname = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordSalt != null">
+        password_salt = #{passwordSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null">
+        usertype = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="isdefault != null">
+        isdefault = #{isdefault,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="organizationId != null">
+        organization_id = #{organizationId,jdbcType=INTEGER},
+      </if>
+      <if test="createdatetime != null">
+        createdatetime = #{createdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationname != null">
+        organizationName = #{organizationname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanshow.wise.base.common.model.SysUser">
+    update sys_user
+    set loginname = #{loginname,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      password_salt = #{passwordSalt,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      usertype = #{usertype,jdbcType=INTEGER},
+      isdefault = #{isdefault,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      organization_id = #{organizationId,jdbcType=INTEGER},
+      createdatetime = #{createdatetime,jdbcType=TIMESTAMP},
+      phone = #{phone,jdbcType=VARCHAR},
+      organizationName = #{organizationname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
-	<context:component-scan base-package="com.ctl.sys.manger.controller" />
+	<context:component-scan base-package="com.ctl.sys.manger.controller,com.hanshow.wise.portal.center.controller,com.hanshow.wise.base.common.service.impl" />
 	<aop:aspectj-autoproxy proxy-target-class="true"/> 
 
 	<!--     
