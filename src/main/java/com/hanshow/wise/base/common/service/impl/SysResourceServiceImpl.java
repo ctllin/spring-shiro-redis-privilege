@@ -1,6 +1,7 @@
 package com.hanshow.wise.base.common.service.impl;
 
 import com.hanshow.wise.base.common.dao.SysResourceMapper;
+import com.hanshow.wise.base.common.model.SysResource;
 import com.hanshow.wise.base.common.model.dto.SysResourceDto;
 import com.hanshow.wise.base.common.service.SysResourceService;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ import java.util.List;
 @Service
 public class SysResourceServiceImpl implements SysResourceService {
     private static Logger logger = LoggerFactory.getLogger(SysResourceServiceImpl.class);
-    @Autowired
+    @Autowired(required = false)
     private SysResourceMapper sysResourceMapper;
 
     /**
@@ -34,10 +35,53 @@ public class SysResourceServiceImpl implements SysResourceService {
      */
     @Override
     public List<SysResourceDto> getSysResourceByUserId(Integer userId) {
-        if(userId==null){
-            logger.info("userId={},return",userId);
+        if (userId == null) {
+            logger.info("userId={},return", userId);
         }
         List<SysResourceDto> sysResourceByUserId = sysResourceMapper.getSysResourceByUserId(userId);
+        return sysResourceByUserId;
+    }
+
+    /**
+     * 获取所有资源列表（上下级和按钮，递归）
+     *
+     * @return
+     */
+    @Override
+    public List<SysResourceDto> getSysResource() {
+        return null;
+    }
+
+    /**
+     * 添加资源
+     *
+     * @param record
+     * @return
+     */
+    @Override
+    public Integer addResource(SysResource record) {
+        return null;
+    }
+
+    /**
+     * 修改资源
+     *
+     * @param record
+     * @return
+     */
+    @Override
+    public Integer modifyResource(SysResource record) {
+        return null;
+    }
+
+    /**
+     * 删除资源
+     *
+     * @param record
+     * @return
+     */
+    @Override
+    public Integer delResource(SysResource record) {
         return null;
     }
 }

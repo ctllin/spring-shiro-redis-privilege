@@ -1,6 +1,6 @@
 package com.hanshow.wise.base.common.service;
 
-import com.ctl.sys.manger.po.SysResource;
+import com.hanshow.wise.base.common.model.SysResource;
 import com.hanshow.wise.base.common.model.dto.SysResourceDto;
 
 import java.util.List;
@@ -22,4 +22,27 @@ public interface SysResourceService {
      * @return
      */
     List<SysResourceDto> getSysResourceByUserId(Integer userId);
+    /**
+     * 获取所有资源列表（上下级和按钮，递归）
+     * @return
+     */
+    List<SysResourceDto> getSysResource();
+    /**
+     * 添加资源
+     * @param record
+     * @return
+     */
+    Integer addResource(SysResource record);
+    /**
+     * 修改资源
+     * @param record
+     * @return
+     */
+    Integer modifyResource(SysResource record);
+    /**
+     * 删除资源
+     * @param record
+     * @return
+     */
+    Integer delResource(SysResource record);
 }
