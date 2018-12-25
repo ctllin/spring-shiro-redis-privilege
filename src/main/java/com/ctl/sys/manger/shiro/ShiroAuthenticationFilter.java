@@ -37,7 +37,8 @@ public class ShiroAuthenticationFilter extends PassThruAuthenticationFilter {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("text/html;charset=UTF-8");
                 //ctl modify 首页地址
-                ((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath()+"/");
+                //((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath()+"/");
+                request.getRequestDispatcher("/").forward(request,response);
             }
             return false;
         }
