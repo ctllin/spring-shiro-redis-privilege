@@ -22,9 +22,9 @@ env.datasource.password=liebe
 resources/config.properties   配置如下：
 env=test
 jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://127.0.0.1:3306/manager?useUnicode=true&characterEncoding=utf-8&useSSL=false
-jdbc.username=root
-jdbc.password=123456
+jdbc.url=jdbc:mysql://127.0.0.1:3307/sys_manager?useUnicode=true&characterEncoding=utf-8&useSSL=false
+jdbc.username=ctl
+jdbc.password=liebe
 
 执行mvn compile -P proc 后target编译后的额config.properties变更为：
 env=proc

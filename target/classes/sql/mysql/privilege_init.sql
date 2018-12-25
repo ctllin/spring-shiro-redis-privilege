@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
-Source Server Version : 50505
-Source Host           : 127.0.0.1:3306
-Source Database       : test
+Source Server         : localhost 3307 ctl
+Source Server Version : 50516
+Source Host           : localhost:3307
+Source Database       : sys_manager
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2018-05-10 15:43:59
+Date: 2018-12-25 17:02:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,8 +42,8 @@ DROP TABLE IF EXISTS `sys_err_mess`;
 CREATE TABLE `sys_err_mess` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `project` smallint(4) DEFAULT NULL,
-  `method` text DEFAULT NULL,
-  `errMess` text DEFAULT NULL,
+  `method` text,
+  `errMess` text,
   `savetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
@@ -100,7 +100,7 @@ CREATE TABLE `sys_organization` (
   `code` varchar(64) NOT NULL,
   `icon` varchar(32) DEFAULT NULL,
   `pid` int(11) DEFAULT NULL,
-  `seq` int(1) NOT NULL DEFAULT 0,
+  `seq` int(1) NOT NULL DEFAULT '0',
   `isdefault` int(1) DEFAULT NULL,
   `createdatetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -122,9 +122,9 @@ CREATE TABLE `sys_resource` (
   `description` varchar(255) DEFAULT NULL,
   `icon` varchar(32) DEFAULT NULL,
   `pid` int(11) DEFAULT NULL,
-  `seq` int(4) NOT NULL DEFAULT 0,
-  `state` int(4) NOT NULL DEFAULT 0,
-  `resourcetype` int(4) NOT NULL DEFAULT 0,
+  `seq` int(4) NOT NULL DEFAULT '0',
+  `state` int(4) NOT NULL DEFAULT '0',
+  `resourcetype` int(4) NOT NULL DEFAULT '0',
   `isdefault` int(4) DEFAULT NULL COMMENT '//1非默认资源可以删除，0默认资源不可以删除',
   `hasChild` int(4) DEFAULT NULL COMMENT '默认0没有，1有',
   `createdatetime` datetime DEFAULT NULL,
@@ -174,9 +174,9 @@ DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `seq` int(1) NOT NULL DEFAULT 0,
+  `seq` int(1) NOT NULL DEFAULT '0',
   `description` varchar(64) DEFAULT NULL,
-  `isdefault` int(1) NOT NULL DEFAULT 0,
+  `isdefault` int(1) NOT NULL DEFAULT '0',
   `updatetime` datetime DEFAULT NULL,
   `savetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -242,13 +242,14 @@ CREATE TABLE `sys_user` (
   `loginname` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
+  `password_salt` varchar(64) DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
-  `sex` int(1) DEFAULT 0,
-  `age` int(1) DEFAULT 0,
-  `usertype` int(1) DEFAULT 0,
-  `isdefault` int(1) DEFAULT 0,
-  `state` int(1) DEFAULT 0,
-  `organization_id` int(11) DEFAULT 0,
+  `sex` int(1) DEFAULT '0',
+  `age` int(1) DEFAULT '0',
+  `usertype` int(1) DEFAULT '0',
+  `isdefault` int(1) DEFAULT '0',
+  `state` int(1) DEFAULT '0',
+  `organization_id` int(11) DEFAULT '0',
   `createdatetime` datetime DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -258,7 +259,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '超级管理员', 'cd92a26534dba48cd785cdcc0b3e6bd1', null, '0', '18', '0', '0', '0', '1', '2012-06-04 01:00:00', null);
+INSERT INTO `sys_user` VALUES ('1', 'admin', '超级管理员', '6020a613313014c1985a3d708a060804', 'ctl', null, '0', '18', '0', '0', '0', '1', '2012-06-04 01:00:00', null);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -279,4 +280,4 @@ INSERT INTO `sys_user_role` VALUES ('1', '1');
 -- View structure for view_sys_user
 -- ----------------------------
 DROP VIEW IF EXISTS `view_sys_user`;
-create view view_sys_user as select su.*,so.`name` as organizationName from sys_user su LEFT JOIN sys_organization so on su.organization_id=so.id
+CREATE ALGORITHM=UNDEFINED DEFINER=`ctl`@`localhost` SQL SECURITY DEFINER VIEW `view_sys_user` AS select `su`.`id` AS `id`,`su`.`loginname` AS `loginname`,`su`.`name` AS `name`,`su`.`password` AS `password`,`su`.`password_salt` AS `password_salt`,`su`.`customer_id` AS `customer_id`,`su`.`sex` AS `sex`,`su`.`age` AS `age`,`su`.`usertype` AS `usertype`,`su`.`isdefault` AS `isdefault`,`su`.`state` AS `state`,`su`.`organization_id` AS `organization_id`,`su`.`createdatetime` AS `createdatetime`,`su`.`phone` AS `phone`,`so`.`name` AS `organizationName` from (`sys_user` `su` left join `sys_organization` `so` on((`su`.`organization_id` = `so`.`id`))) ;

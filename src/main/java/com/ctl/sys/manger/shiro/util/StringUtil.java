@@ -101,7 +101,7 @@ public class StringUtil {
 
     public static void main(String[] args) {
         //String password = createPassword("liebe", "ctllin", 2);
-        String password = createPassword("liebe", "ctllin", 2);
+        String password = createPassword("123456", "ctl", 2);
         System.out.println(password);
     }
 }
