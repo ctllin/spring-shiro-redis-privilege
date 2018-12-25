@@ -49,6 +49,7 @@ com\hanshow\wise\base\common\model\SysUserExample.class
 com\ctl\sys\manger\pageModel\sys\Resource.class
 Test.class
 com\ctl\sys\manger\shiro\RedisCacheManager.class
+com\ctl\sys\manger\shiro\ShiroSessionListener.class
 com\ctl\sys\manger\po\SysOrganizationExample.class
 com\ctl\ftp\RSA.class
 com\ctl\sys\manger\po\SysUserRoleExample$Criterion.class

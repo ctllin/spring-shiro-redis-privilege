@@ -87,7 +87,9 @@ public class ShiroAuthorizationFilter extends AuthorizationFilter {
             }
         }
         try {//认证成功后每次刷新权限有效时长
-            Boolean expire = redisTemplate.expire(RedisCache.shiro_cache_prefix + subject.getPrincipal(), Integer.parseInt(ConfigUtils.getType("shiro.cache.timeout")), TimeUnit.SECONDS);
+            String key = RedisCache.shiro_cache_prefix + subject.getPrincipal();
+            Boolean expire = redisTemplate.expire(key, Integer.parseInt(ConfigUtils.getType("shiro.cache.timeout")), TimeUnit.SECONDS);
+            logger.info("key={},flushTime={}",key,Integer.parseInt(ConfigUtils.getType("shiro.cache.timeout")));
         } catch (NumberFormatException e) {
             logger.error("用户[{}]刷新权限cache失败", subject.getPrincipal(), e);
         }

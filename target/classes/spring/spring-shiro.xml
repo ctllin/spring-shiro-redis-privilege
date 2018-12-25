@@ -86,4 +86,6 @@
     </bean>
 
     <bean class="com.ctl.sys.manger.shiro.exception.DefaultExceptionHandler"/>
+    <bean id="shiroSessionListener" class="com.ctl.sys.manger.shiro.ShiroSessionListener"></bean>
+
 </beans>

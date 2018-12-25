@@ -1,6 +1,7 @@
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\controller\sys\ResourceController.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\mapper\SysRoleMapper.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\util\DataStatus.java
+F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\ShiroSessionListener.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\ctl\sys\manger\shiro\RedisSessionDao.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\hanshow\wise\base\common\dao\SysRoleMapper.java
 F:\github\spring-shiro-redis-privilege\src\main\java\com\hanshow\wise\base\common\dao\SysOrganizationMapper.java
